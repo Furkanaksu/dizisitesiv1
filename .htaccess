@@ -7,8 +7,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ /dizisitesi/index.php/$1 [L,QSA]
 
-
-
 Options -Indexes
 RewriteRule ^uploads/.*\.(php|rb|py|sh|jsp)$ - [F,L,NC]
 RewriteRule ^assets/.*\.(php|rb|py|sh|jsp)$ - [F,L,NC]

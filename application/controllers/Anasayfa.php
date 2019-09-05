@@ -3,58 +3,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Anasayfa extends CI_Controller {
 
-	public function index()
-	{
-		$this->load->view('front/anasayfa');
-	}
-
-    function login_validation()
+    private $fb;
+    public function __construct()
     {
-        $this-> form_validation->set_rules('login-email', 'Username', 'required');
-        $this->form_validation->set_rules('login-password', 'Password', 'required');
-        if($this->form_validation->run())
+        parent::__construct();
+        $this->load->library('facebookSDK');
+        $this->fb = $this->facebooksdk;
+    }
+
+    public function index()
+    {
+        $this->load->library('facebookSDK');
+        $this->fb = $this->facebooksdk;
+        $adress = "http://localhost/dizisitesi/Anasayfa/callback";
+        $data['url'] = $this->fb->getLoginUrl($adress);
+        $this->load->view('front/anasayfa',$data);
+    }
+
+    public function callback()
+    {
+        $token = $this->fb->getAccessToken();
+        $data = $this->fb->getUserData($token);
+        $email = $data['email'];
+        $this->load->model('anasayfa_model');
+        $sonuc = $this->anasayfa_model->facebook($email);
+        if($sonuc == true)
+        {
+                $this->session->userdata('durum',true);
+                $this->session->userdata('user',$sonuc);
+                $this->session->set_flashdata('success','<div class="alert alert-success">Giriş Yapıldı</div>');
+                redirect(base_url().'anasayfa');
+        }else
         {
 
-            $UserEmail = $this->input->post('login-email');
-            $UserPassword = $this->input->post('login-password');
 
-            $AdminCheck = $this->admin_model->login($UserEmail, $UserPassword);
-            if(count($AdminCheck)> 0)
+
+            $tarih = date('Y-m-d');
+            $random = rand(123456,987654);
+            $data = array(
+                'uyetipi'=>'facebook',
+                'uyeadi'=>$data['name'],
+                'uyemail'=>$data['email'],
+                'uyesifre'=>$random,
+                'uyeresim'=>'http://graph.facebook.com/'.$data['id'].'/picture',
+                'uyeaktif'=>1,
+                'kayittarihi'=>$tarih);
+            $this->load->model('anasayfa_model');
+            $ekle = $this->anasayfa_model->ekle($data,'yonetim');
+            if($ekle)
             {
-                if($AdminCheck->Status != 1)
-                {
-                    $this->session->set_flashdata('Message',$this->lang->line('notActive'));
-                    redirect(site_url() . 'admin');
-
-                    return;
-                }
-                $session_data = array(
-                    'Email'     =>     $AdminCheck->Email,
-                    'Id'     =>     $AdminCheck->Id,
-                    'IP'     =>     $AdminCheck->IP,
-                    'LoginDate'=>     $AdminCheck->LoginDate,
-                    'FailedDate'=>     $AdminCheck->FailedDate,
-                    'Name'=>     $AdminCheck->Name,
-                    'Surname'=>     $AdminCheck->Surname,
-                    'OS'=>     $AdminCheck->OS,
-                    'Browser'=>     $AdminCheck->Browser
-
-                );
-                $this->session->set_userdata($session_data);
-
-                redirect(site_url() . 'admin/dashboard');
-
-                //$this->load->view("admin/logout");
+                $this->session->set_flashdata('info','<div class="alert alert-success">Tebrikler artık giriş yapabilirsiniz</div>');
+                redirect(base_url().'anasayfa');
             }
-            else
-            {
-                $this->session->set_flashdata('error', $this->lang->line('invalidInfo'));
-                redirect(site_url() . 'admin');
-            }
-        }
-        else
-        {
-            $this->login();
         }
     }
 }
