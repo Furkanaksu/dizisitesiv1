@@ -49,10 +49,20 @@ class Uyeislemleri extends CI_Controller
         $email = $this->input->post('email');
         $sifre = $this->input->post('password');
         $sonuc = $this->anasayfa_model->uyeKontrol($email,$sifre);
+
         if($sonuc)
         {
             $this->session->userdata('durum',true);
             $this->session->userdata('user',$sonuc);
+            $session_data = array(
+                'Email'     =>     $sonuc->uyemail,
+                'Id'     =>     $sonuc->id,
+                'Resim'     =>     $sonuc->uyeresim,
+                'Uyeadi'=>     $sonuc->uyeadi,
+            );
+            $this->session->set_userdata($session_data);
+            echo $this->session->userdata('Email');
+            die();
             $this->session->set_flashdata('success','<div class="alert alert-success">Giriş Yapıldı</div>');
             redirect(base_url().'anasayfa');
         }

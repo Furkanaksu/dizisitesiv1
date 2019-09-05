@@ -30,7 +30,7 @@
     </div>
 </div>
 <!--end of preloading-->
-<!--login form popup-->
+<?php if($this->session->userdata('Email') == null){?>
 <div class="login-wrapper" id="login-content">
     <div class="login-content">
         <a href="#" class="close">x</a>
@@ -108,6 +108,14 @@
         </form>
     </div>
 </div>
+<?php }else{ ?>
+<div class="login-wrapper" id="login-content">
+    <?php echo $this->session->userdata('Uyeadi')?>
+    <?php echo $this->session->userdata('Resim')?>
+</div>
+<?php }?>
+<!--login form popup-->
+
 <!--end of signup form popup-->
 
 <!-- BEGIN | Header -->
