@@ -30,48 +30,7 @@
     </div>
 </div>
 <!--end of preloading-->
-<?php if($this->session->userdata('Email') == null){?>
-<div class="login-wrapper" id="login-content">
-    <div class="login-content">
-        <a href="#" class="close">x</a>
-        <h3>Login</h3>
-        <form action="<?php base_url()?>Uyeislemleri/girisYap" method="post" id="form-login">
-            <div class="row">
-                <label for="username">
-                    E-mail:
-                    <input type="email" name="email" id="email" placeholder="Email">
-                </label>
-            </div>
 
-            <div class="row">
-                <label for="password">
-                    Password:
-                    <input type="password" name="password" id="password">
-                </label>
-            </div>
-            <div class="row">
-                <div class="remember">
-                    <div>
-                        <input type="checkbox" name="remember" value="Remember me"><span>Remember me</span>
-                    </div>
-                    <a href="#">Forget password ?</a>
-                </div>
-            </div>
-            <div class="row">
-                <button type="submit">Giriş Yap</button>
-            </div>
-        </form>
-        <div class="row">
-            <p>Or via social</p>
-            <div class="social-btn-2">
-                <a class="fb" href="<?php echo $url; ?>"><i class="ion-social-facebook"></i>Facebook</a>
-                <a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!--end of login form popup-->
-<!--signup form popup-->
 <div class="login-wrapper" id="signup-content">
     <div class="login-content">
         <a href="#" class="close">x</a>
@@ -108,12 +67,7 @@
         </form>
     </div>
 </div>
-<?php }else{ ?>
-<div class="login-wrapper" id="login-content">
-    <?php echo $this->session->userdata('Uyeadi')?>
-    <?php echo $this->session->userdata('Resim')?>
-</div>
-<?php }?>
+
 <!--login form popup-->
 
 <!--end of signup form popup-->
@@ -201,18 +155,13 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav flex-child-menu menu-right">
-                    <li class="dropdown first">
-                        <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                            pages <i class="fa fa-angle-down" aria-hidden="true"></i>
-                        </a>
-                        <ul class="dropdown-menu level1">
-                            <li><a href="404.html">404 Page</a></li>
-                            <li class="it-last"><a href="comingsoon.html">Coming soon</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Help</a></li>
-                    <li class="loginLink"><a href="#">LOG In</a></li>
+                    <?php if($this->session->userdata('Name') == '' || $this->session->userdata('Name') == NULL){?>
+                    <li class=""><a href="<?php echo base_url(); ?>Uyeislemleri/login">LOG In</a></li>
                     <li class="btn signupLink"><a href="#">sign up</a></li>
+                    <?php }else{ ?>
+                        <li ><a style="color: #01FF70"><?php echo $this->session->userdata('Name').' '.$this->session->userdata('Surname') ?></a></li>
+                        <li ><a style="color: orangered" href="<?php echo base_url(); ?>Uyeislemleri/logout">Çıkış Yap</a></li>
+                    <?php }?>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

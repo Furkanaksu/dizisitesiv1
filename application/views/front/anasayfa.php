@@ -12,114 +12,21 @@
                 <a href="#"><i class="ion-social-youtube"></i></a>
             </div>
             <div class="slick-multiItemSlider">
+                <?php foreach ($movies as $row) {?>
                 <div class="movie-item">
                     <div class="mv-img">
                         <a href="#"><img src="<?php echo base_url('assets/front/'); ?>images\uploads\slider1.jpg" alt=""></a>
                     </div>
                     <div class="title-in">
                         <div class="cate">
-                            <span class="blue"><a href="#">Sci-fi</a></span>
+                            <span class="blue"><a href="#"><?php echo $row->Category ?></a></span>
+                            <span class="warning"><a href="#"><?php echo $row->Category2 ?></a></span>
                         </div>
-                        <h6><a href="#">Interstellar</a></h6>
-                        <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                        <h6><a href="#"><?php echo $row->Name ?></a></h6>
+                        <p><i class="ion-android-star"></i><span><?php echo $row->Score ?></span> /10</p>
                     </div>
                 </div>
-                <div class="movie-item">
-                    <div class="mv-img">
-                        <a href="#"><img src="<?php echo base_url('assets/front/'); ?>images\uploads\slider2.jpg" alt=""></a>
-                    </div>
-                    <div class="title-in">
-                        <div class="cate">
-                            <span class="yell"><a href="#">action</a></span>
-                        </div>
-                        <h6><a href="#">The revenant</a></h6>
-                        <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                    </div>
-                </div>
-                <div class="movie-item">
-                    <div class="mv-img">
-                        <a href="#"><img src="<?php echo base_url('assets/front/'); ?>images\uploads\slider3.jpg" alt=""></a>
-                    </div>
-                    <div class="title-in">
-                        <div class="cate">
-                            <span class="green"><a href="#">comedy</a></span>
-                        </div>
-                        <h6><a href="#">Die hard</a></h6>
-                        <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                    </div>
-                </div>
-                <div class="movie-item">
-                    <div class="mv-img">
-                        <a href="#"><img src="<?php echo base_url('assets/front/'); ?>images\uploads\slider4.jpg" alt=""></a>
-                    </div>
-                    <div class="title-in">
-                        <div class="cate">
-                            <span class="blue"><a href="#">Sci-fi</a></span> <span class="orange"><a href="#">advanture</a></span>
-                        </div>
-                        <h6><a href="#">The walk</a></h6>
-                        <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                    </div>
-                </div>
-                <div class="movie-item">
-                    <div class="mv-img">
-                        <a href="#"><img src="<?php echo base_url('assets/front/'); ?>images\uploads\slider1.jpg" alt=""></a>
-                    </div>
-                    <div class="title-in">
-                        <div class="cate">
-                            <span class="blue"><a href="#">Sci-fi</a></span>
-                        </div>
-                        <h6><a href="#">Interstellar</a></h6>
-                        <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                    </div>
-                </div>
-                <div class="movie-item">
-                    <div class="mv-img">
-                        <a href="#"><img src="<?php echo base_url('assets/front/'); ?>images\uploads\slider2.jpg" alt=""></a>
-                    </div>
-                    <div class="title-in">
-                        <div class="cate">
-                            <span class="yell"><a href="#">action</a></span>
-                        </div>
-                        <h6><a href="#">The revenant</a></h6>
-                        <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                    </div>
-                </div>
-                <div class="movie-item">
-                    <div class="mv-img">
-                        <img src="<?php echo base_url('assets/front/'); ?>images\uploads\slider3.jpg" alt="">
-                    </div>
-                    <div class="title-in">
-                        <div class="cate">
-                            <span class="green"><a href="#">comedy</a></span>
-                        </div>
-                        <h6><a href="#">Die hard</a></h6>
-                        <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                    </div>
-                </div>
-                <div class="movie-item">
-                    <div class="mv-img">
-                        <img src="<?php echo base_url('assets/front/'); ?>images\uploads\slider4.jpg" alt="">
-                    </div>
-                    <div class="title-in">
-                        <div class="cate">
-                            <span class="blue"><a href="#">Sci-fi</a></span> <span class="orange"><a href="#">advanture</a></span>
-                        </div>
-                        <h6><a href="#">The walk</a></h6>
-                        <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                    </div>
-                </div>
-                <div class="movie-item">
-                    <div class="mv-img">
-                        <img src="<?php echo base_url('assets/front/'); ?>images\uploads\slider3.jpg" alt="">
-                    </div>
-                    <div class="title-in">
-                        <div class="cate">
-                            <span class="green"><a href="#">comedy</a></span>
-                        </div>
-                        <h6><a href="#">Die hard</a></h6>
-                        <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                    </div>
-                </div>
+                <?php }?>
             </div>
         </div>
     </div>
