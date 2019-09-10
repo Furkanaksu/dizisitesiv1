@@ -91,6 +91,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li>
                     <a href="<?php echo site_url(); ?>Admin/Movies"><i class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Filmler</span></a>
                 </li>
+                <li>
+                    <a href="<?php echo site_url(); ?>Admin/ImagesUpload"><i class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Resimler</span></a>
+                </li>
             </ul>
 
             <!-- ------------------------------------- END Sidebar Navigation----------------------------------- -->

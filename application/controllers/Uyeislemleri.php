@@ -132,7 +132,7 @@ class Uyeislemleri extends CI_Controller
                     );
                     $this->session->set_userdata($session_data);
 
-                    redirect(base_url() . 'anasayfa');
+                    redirect(base_url());
 
                     //$this->load->view("admin/logout");
                 } else {
@@ -148,6 +148,6 @@ class Uyeislemleri extends CI_Controller
     function logout()
     {
         $this->session->sess_destroy();
-        redirect(site_url() . 'anasayfa');
+        redirect(site_url());
     }
 }

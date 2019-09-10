@@ -84,3 +84,12 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 define('PAGE_LIMIT', 24);
+
+define('UPLOAD_OPTIONS', array(
+    'upload_path'=>'./assets/movies/',
+    'allowed_types'=>'gif|jpg|png|pdf|doc',
+    'max_size'=>5120,
+    'max_width'=>4048,
+    'max_height'=>4048,
+    'file_ext_tolower'=>true
+));

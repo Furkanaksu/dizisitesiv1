@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div class="table-options clearfix">
             <div class="btn-group btn-group-sm pull-right">
-                <a href="<?php echo base_url(); ?>admin/AddAdmin" class="btn btn-primary" data-toggle="tooltip" title="Add New Admin">Add</i></a>
+                <a href="<?php echo base_url(); ?>admin/addMovie" class="btn btn-primary" data-toggle="tooltip" title="Add New Admin">Add</i></a>
             </div>
         </div>
         <?php

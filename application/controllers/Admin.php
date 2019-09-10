@@ -124,14 +124,14 @@ class Admin extends CI_Controller {
         $data['CurrentPage'] = $page;
         $page = $page - 1;
         $start = ($page * PAGE_LIMIT);
-        $productArray = $this->product_model->movies(array(),$start);
+        $productArray = $this->movie_model->Products(array(),$start);
         $data['Products'] = $productArray['Data'];
         $data['TotalPage'] = ceil($productArray['TotalRecord'] / PAGE_LIMIT);
-        $productArray = $this->product_model->movies(array());
+        $productArray = $this->movie_model->Products(array());
         $data['Products'] = $productArray['Data'];
         $data['MetaTitle']='UploadImageButton';
         $data['MetaDescription']='admin/imageUploadButton';
-        $data['View']='back/imageUploadButton';
+        $data['View']='back/images';
         $this->load->view('back/template', $data);
     }
 
@@ -239,8 +239,6 @@ class Admin extends CI_Controller {
         $data['MetaTitle']='addMovie';
         $data['MetaDescription']='admin/addMovie';
         $data['View']='back/addMovie';
-        $productArray = $this->product_model->movies(array());
-        $data['Products'] = $productArray['Data'];
 
         if(!empty($this->input->post()))
         {
@@ -260,19 +258,13 @@ class Admin extends CI_Controller {
             }
 
             $formData=array(
-                'Title'=>$this->input->post('Title'),
-                'CategoryId'=>$this->input->post('CategoryId'),
-                'Status'=>$this->input->post('Status'),
-                'Price'=>$this->input->post('Price'),
-                'PriceDiscount'=>$this->input->post('PriceDiscount'),
-                'Country'=>$this->input->post('Country'),
-                'Year'=>$this->input->post('Year'),
-                'Width'=>$this->input->post('Width'),
-                'Height'=>$this->input->post('Height'),
-                'Description'=>$this->input->post('Description'),
-                'AddedDate'=>$this->input->post('AddedDate')
+                'Name'=>$this->input->post('Name'),
+                'Category'=>$this->input->post('Category'),
+                'Category2'=>$this->input->post('Category2'),
+                'Score'=>$this->input->post('Score'),
+                'Date'=>$this->input->post('Date'),
             );
-            $resultArray = $this->admin_model->AddProducts($formData);
+            $resultArray = $this->admin_model->addMovie($formData);
 
             if(isset($resultArray['Errors']) && count($resultArray ['Errors']) > 0){
                 $this->session->set_flashdata('MessageType','danger');
@@ -281,7 +273,7 @@ class Admin extends CI_Controller {
             } else if(count($resultArray['Data']) > 0) {
                 $this->session->set_flashdata('MessageType','success');
                 $this->session->set_flashdata('Message', $this->lang->line('productAddSuccess'));
-                redirect(site_url() . 'admin/Products');
+                redirect(site_url() . 'Admin/movies');
             }
 
             $this->session->set_flashdata('MessageType','danger');
@@ -554,7 +546,7 @@ class Admin extends CI_Controller {
         $data['MetaTitle']='ProductsImage';
         $data['MetaDescription']='admin/ProductsImage';
         $data['View']='back/ProductsImage';
-        $data['ImageList'] = $this->product_model->ProductsImage(array('ProductId'=>$imageId));
+        $data['ImageList'] = $this->movie_model->ProductsImage(array('ProductId'=>$imageId));
         $data['ProductId'] = $imageId;
         $this->load->view('back/template', $data);
     }
@@ -562,8 +554,8 @@ class Admin extends CI_Controller {
     function ImageMain(){
         $data['MetaTitle']='ProductsImage';
         $data['MetaDescription']='admin/ProductsImage';
-        $data['View']='back/mainImage';
-        $data['ImageList'] = $this->product_model->ProductsImage();
+        $data['View']='back/images';
+        $data['ImageList'] = $this->movie_model->Products();
         $this->load->view('back/template', $data);
     }
 
@@ -604,8 +596,8 @@ class Admin extends CI_Controller {
         }
 
 
-        $productArray = $this->product_model->Products(array('Id'=> $productId));
-        $title= $productArray['Data'][0]->Title;
+        $productArray = $this->movie_model->Products(array('Id'=> $productId));
+        $title= $productArray['Data'][0]->Name;
 
         $uploadedFiles = upload_files($title, $_FILES['file']);
         if($uploadedFiles == false )

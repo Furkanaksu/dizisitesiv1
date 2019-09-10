@@ -119,6 +119,23 @@ class admin_model extends CI_Model
             return array();
         }
     }
+
+    public function movies($categoryWhere = array()){
+        if(count($categoryWhere) > 0)
+        {
+            $this->db->where($categoryWhere);
+        }
+        $this->db->order_by('Id', 'ASC');
+        $query = $this->db->get('movies');
+        if($query->num_rows() > 0)
+        {
+            return $query->result();
+        }
+        else
+        {
+            return array();
+        }
+    }
     // ---------------------UPDATE ADMIN-------------------------------------------------------------------------------
     function addAdmin($formData)
     {
@@ -185,7 +202,7 @@ class admin_model extends CI_Model
     }
 
     // ---------------------AddProducts-------------------------------------------------------------------------------
-    function AddProducts($formData = array())
+    function addMovie($formData = array())
     {
         $resultArray = array(
             'Errors' => array(),
@@ -193,26 +210,19 @@ class admin_model extends CI_Model
         );
 
         $insertData = array(
-            'Title'=>$formData['Title'],
-            'CategoryId'=>$formData['CategoryId'],
-            'UpdatedDate'=>'0000-00-00 00:00:00',
-            'Status'=>$formData['Status'],
-            'Price'=>$formData['Price'],
-            'PriceDiscount'=>$formData['PriceDiscount'],
-            'Country'=>$formData['Country'],
-            'Year'=>$formData['Year'],
-            'Width'=>$formData['Width'],
-            'Height'=>$formData['Height'],
-            'Description'=>$formData['Description'],
-            'AddedDate'=>$formData['AddedDate']
+            'Name'=>$formData['Name'],
+            'Category'=>$formData['Category'],
+            'Category2'=>$formData['Category2'],
+            'Score'=>$formData['Score'],
+            'Date'=>$formData['Date'],
         );
 
-        $this->db->insert('products',$insertData);
+        $this->db->insert('movies',$insertData);
         $insertResult = ($this->db->affected_rows() != 1) ? false : true;
         if($insertResult == true) {
-            $resultArray['Data'] = $this->product_model->Products(array('Title'=>$formData['Title']));
+            $resultArray['Data'] = $this->movies(array('Name'=>$formData['Name']));
         } else {
-            $resultArray['Errors'] = array($this->lang->line('productCantAdded'));
+            $resultArray['Errors'] = array('Film Eklenemedi');
         }
         return $resultArray;
     }
